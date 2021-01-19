@@ -5,8 +5,8 @@
         >Home</router-link
       >
       |
-      <router-link v-if="pohrana_podataka.trenutni_korisnik" to="/about"
-        >About</router-link
+      <router-link v-if="pohrana_podataka.trenutni_korisnik" to="/profesor"
+        >Profesor</router-link
       >
 
       <router-link v-if="!pohrana_podataka.trenutni_korisnik" to="/registracija"
