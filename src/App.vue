@@ -1,13 +1,84 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>|
-      <router-link to="/registracija">Registracija</router-link>
+      <router-link v-if="pohrana_podataka.trenutni_korisnik" to="/"
+        >Home</router-link
+      >
+      |
+      <router-link v-if="pohrana_podataka.trenutni_korisnik" to="/about"
+        >About</router-link
+      >
+
+      <router-link v-if="!pohrana_podataka.trenutni_korisnik" to="/registracija"
+        >Registracija</router-link
+      >
+
+      <router-link v-if="!pohrana_podataka.trenutni_korisnik" to="/prijava"
+        >Prijava</router-link
+      >
+      |
+
+      <a
+        href="#"
+        v-if="pohrana_podataka.trenutni_korisnik"
+        @click.prevent="odjava"
+        class="nav-link"
+        >Logout
+      </a>
     </div>
     <router-view />
   </div>
 </template>
+
+<script>
+import pohrana_podataka from "@/pohrana_podataka.js";
+import { firebase } from "@/firebase";
+import router from "@/router";
+
+firebase.auth().onAuthStateChanged((user) => {
+  const currentRoute = router.currentRoute;
+
+  if (user) {
+    //user is signed in.
+    console.log("***" + user.email);
+    pohrana_podataka.trenutni_korisnik = user.email;
+
+    if (!currentRoute.meta.needsUser) {
+      router.push({ name: "Home" });
+    }
+  } else {
+    //user is not signed in.
+    console.log("***No user");
+    pohrana_podataka.trenutni_korisnik = null;
+
+    if (currentRoute.meta.needsUser) {
+      router.push({ name: "prijava" });
+    }
+  }
+});
+
+export default {
+  name: "app",
+  data() {
+    //funkcija
+    return {
+      //objekt
+      pohrana_podataka: pohrana_podataka,
+    };
+  },
+
+  methods: {
+    odjava() {
+      firebase
+        .auth()
+        .signOut()
+        .then(() => {
+          this.$router.push({ name: "prijava" });
+        });
+    },
+  },
+};
+</script>
 
 <style lang="scss">
 #app {
