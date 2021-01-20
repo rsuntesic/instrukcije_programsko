@@ -11,6 +11,9 @@
       <router-link v-if="pohrana_podataka.trenutni_korisnik" to="/student"
         >Student</router-link
       >
+      <router-link v-if="pohrana_podataka.trenutni_korisnik" to="/predmet"
+        >Predmet</router-link
+      >
 
       <router-link v-if="!pohrana_podataka.trenutni_korisnik" to="/registracija"
         >Registracija</router-link
