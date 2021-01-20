@@ -49,9 +49,9 @@ firebase.auth().onAuthStateChanged((user) => {
     console.log("***" + user.email);
     pohrana_podataka.trenutni_korisnik = user.email;
 
-    if (!currentRoute.meta.needsUser) {
+    /* if (!currentRoute.meta.needsUser) {
       router.push({ name: "Home" });
-    }
+    } */
   } else {
     //user is not signed in.
     console.log("***No user");

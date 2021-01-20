@@ -4,7 +4,7 @@
       <div class="row">
         <div class="col-sm"></div>
         <div class="col-sm">
-          <form action="/profesor">
+          <form action="/fizika">
             <input type="submit" value="Fizika" />
           </form>
           <form action="/profesor">
