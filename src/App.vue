@@ -11,8 +11,8 @@
       <router-link v-if="pohrana_podataka.trenutni_korisnik" to="/student"
         >Student</router-link
       >
-      <router-link v-if="pohrana_podataka.trenutni_korisnik" to="/predmet"
-        >Predmet</router-link
+      <router-link v-if="pohrana_podataka.trenutni_korisnik" to="/predmeti"
+        >Predmeti</router-link
       >
 
       <router-link v-if="!pohrana_podataka.trenutni_korisnik" to="/registracija"
@@ -49,9 +49,9 @@ firebase.auth().onAuthStateChanged((user) => {
     console.log("***" + user.email);
     pohrana_podataka.trenutni_korisnik = user.email;
 
-    /* if (!currentRoute.meta.needsUser) {
+    if (!currentRoute.meta.needsUser) {
       router.push({ name: "Home" });
-    } */
+    }
   } else {
     //user is not signed in.
     console.log("***No user");

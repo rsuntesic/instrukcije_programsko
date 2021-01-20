@@ -1,11 +1,27 @@
 <template>
-  <div class="fizika">
+  <div class="predemti">
     <div class="container.fluid">
       <h1>Fizika</h1>
       <div class="row">
         <div class="col-sm"></div>
         <div class="col-sm">
           <form @submit.prevent="dodajZahtjev">
+            <div class="form-group">
+              <label for="odaberipredmet"><h3>Odaberi predmet</h3></label>
+              <select
+                class="form-control"
+                id="odaberipredmet"
+                type="text"
+                v-model="odaberiPredmet"
+              >
+                <option> Fizika </option>
+                <option> Matematika </option>
+                <option> Kemija </option>
+                <option> Infromatika </option>
+                <option> Engleski jezik </option>
+                <option> Njemacki jezik </option>
+              </select>
+            </div>
             <div class="form-group">
               <label for="razinaZnanja"><h3>Razina znanja</h3></label>
               <select
@@ -55,10 +71,11 @@ import { db } from "@/firebase";
 import pohrana_podataka from "@/pohrana_podataka";
 
 export default {
-  name: "fizika",
+  name: "predemti",
   data() {
     return {
       korisnik: pohrana_podataka.trenutni_korisnik,
+      odaberiPredmet: "",
       razinaZnanja: "",
       Datum: "",
       Vrijeme: "",
@@ -70,6 +87,7 @@ export default {
       db.collection("zahtjevi")
         .add({
           korisnik: this.korisnik,
+          odaberiPredmet: this.odaberiPredmet,
           razinaZnanja: this.razinaZnanja,
           Datum: this.Datum,
           Vrijeme: this.Vrijeme,
@@ -77,6 +95,7 @@ export default {
         })
         .then(() => {
           alert("Spremljeno");
+          this.odaberiPredmet = "";
           this.razinaZnanja = "";
           this.Datum = "";
           this.Vrijeme = "";

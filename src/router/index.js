@@ -11,12 +11,12 @@ const routes = [
     component: Home
   },
   {
-    path: '/fizika',
-    name:'Fizika',
+    path: '/predmeti',
+    name:'Predmeti',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/fizika.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/predmeti.vue')
   },
   {
     path: '/profesor',
@@ -33,14 +33,6 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/student.vue')
-  },
-  {
-    path: '/predmet',
-    name:'Predmet',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/predmet.vue')
   },
   {
     path: '/registracija',
