@@ -8,6 +8,9 @@
       <router-link v-if="pohrana_podataka.trenutni_korisnik" to="/profesor"
         >Profesor</router-link
       >
+      <router-link v-if="pohrana_podataka.trenutni_korisnik" to="/student"
+        >Student</router-link
+      >
 
       <router-link v-if="!pohrana_podataka.trenutni_korisnik" to="/registracija"
         >Registracija</router-link

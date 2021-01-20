@@ -1,5 +1,5 @@
 <template>
-  <div class="profesor">
+  <div class="student">
     <div class="container.fluid">
       <div class="row">
         <div class="col-1"></div>
@@ -11,27 +11,26 @@
                 <th scope="col">Ime</th>
                 <th scope="col">Prezime</th>
                 <th scope="col">Email</th>
-                <th scope="col">Predmet</th>
                 <th scope="col">Jmbag</th>
               </tr>
             </thead>
-            <profesori-kartice
-              v-for="profesor in profesor"
-              :key="profesor.id"
-              :info="profesor"
+            <student-kartice
+              v-for="student in student"
+              :key="student.id"
+              :info="student"
             />
           </table>
         </div>
 
         <div class="col-sm">
-          <form @submit.prevent="dodajProfesora">
+          <form @submit.prevent="dodajStudenta">
             <div class="form-group">
               <label for="ime">Ime</label>
               <input
                 type="text"
                 v-model="ime"
                 class="form-control"
-                id="imeProfesora"
+                id="imeStudenta"
                 placeholder="Ime"
               />
             </div>
@@ -49,21 +48,11 @@
               <label for="exampleInputEmail1">Email adresa</label>
               <input
                 type="email"
-                v-model="emailProfesora"
+                v-model="emailStudent"
                 class="form-control"
                 id="exampleInputEmail1"
                 aria-describedby="emailHelp"
                 placeholder="Email"
-              />
-            </div>
-            <div class="form-group">
-              <label for="predmet">Predmet</label>
-              <input
-                type="text"
-                v-model="predmet"
-                class="form-control"
-                id="predmet"
-                placeholder="predmet"
               />
             </div>
             <div class="form-group">
@@ -90,34 +79,32 @@
 <script>
 import { db } from "@/firebase";
 import pohrana_podataka from "@/pohrana_podataka";
-import profesoriKartice from "@/components/profesoriKartice";
+import studentKartice from "@/components/studentKartice";
 
 let brojac = 0;
 
 export default {
-  name: "profesor",
+  name: "student",
   data() {
     return {
-      profesor: [],
+      student: [],
       korisnik: pohrana_podataka.trenutni_korisnik,
       ime: "",
       prezime: "",
-      emailProfesora: "",
-      predmet: "",
+      emailStudent: "",
       jmbag: "",
       brojac,
     };
   },
 
   methods: {
-    dodajProfesora() {
-      db.collection("profesor")
+    dodajStudenta() {
+      db.collection("student")
         .add({
           korisnik: this.korisnik,
           ime: this.ime,
           prezime: this.prezime,
-          email: this.emailProfesora,
-          predmet: this.predmet,
+          email: this.emailStudent,
           jmbag: this.jmbag,
           vrijeme_unosa: Date.now(),
         })
@@ -125,8 +112,7 @@ export default {
           alert("Spremljeno");
           this.ime = "";
           this.prezime = "";
-          this.emailProfesora = "";
-          this.predmet = "";
+          this.emailStudent = "";
           this.jmbag = "";
         })
         .catch(function(e) {
@@ -137,26 +123,25 @@ export default {
 
   mounted() {
     //dohvat iz Firebasea
-    this.dohvati_profesora;
+    this.dohvati_studenta;
   },
   computed: {
-    dohvati_profesora() {
-      db.collection("profesor")
+    dohvati_studenta() {
+      db.collection("student")
         .orderBy("ime", "asc")
         .limit(10)
         .get()
         .then((query) => {
-          this.profesor = [];
+          this.student = [];
           brojac = 0;
           query.forEach((doc) => {
             const data = doc.data();
             brojac++;
 
-            this.profesor.push({
+            this.student.push({
               id: doc.id,
               ime: data.ime,
               prezime: data.prezime,
-              predmet: data.predmet,
               jmbag: data.jmbag,
               email: data.email,
               brojac: brojac,
@@ -166,7 +151,7 @@ export default {
     },
   },
   components: {
-    profesoriKartice,
+    studentKartice,
   },
 };
 </script>

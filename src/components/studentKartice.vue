@@ -5,15 +5,13 @@
       <td>{{ info.ime }}</td>
       <td>{{ info.prezime }}</td>
       <td>{{ info.email }}</td>
-      <td>{{ info.predmet }}</td>
-      <td>{{ info.telefon }}</td>
-      <td>{{ info.adresa }}</td>
+      <td>{{ info.jmbag }}</td>
     </tr>
   </tbody>
 </template>
 <script>
 export default {
   props: ["info"],
-  name: "profesori_kartice",
+  name: "studentKartice",
 };
 </script>
