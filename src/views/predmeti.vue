@@ -1,13 +1,12 @@
 <template>
   <div class="predemti">
     <div class="container.fluid">
-      <h1>Fizika</h1>
       <div class="row">
         <div class="col-sm"></div>
         <div class="col-sm">
           <form @submit.prevent="dodajZahtjev">
             <div class="form-group">
-              <label for="odaberipredmet"><h3>Odaberi predmet</h3></label>
+              <label for="odaberipredmet"><h2>Odaberi predmet</h2></label>
               <select
                 class="form-control"
                 id="odaberipredmet"

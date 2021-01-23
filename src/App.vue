@@ -1,37 +1,79 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link v-if="pohrana_podataka.trenutni_korisnik" to="/"
-        >Home</router-link
+    <nav id="nav" class="navbar navbar-expand-sm navbar-light">
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNavDropdown"
+        aria-controls="navbarNavDropdown"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
       >
-      |
-      <router-link v-if="pohrana_podataka.trenutni_korisnik" to="/profesor"
-        >Profesor</router-link
-      >
-      <router-link v-if="pohrana_podataka.trenutni_korisnik" to="/student"
-        >Student</router-link
-      >
-      <router-link v-if="pohrana_podataka.trenutni_korisnik" to="/predmeti"
-        >Predmeti</router-link
-      >
-
-      <router-link v-if="!pohrana_podataka.trenutni_korisnik" to="/registracija"
-        >Registracija</router-link
-      >
-
-      <router-link v-if="!pohrana_podataka.trenutni_korisnik" to="/prijava"
-        >Prijava</router-link
-      >
-      |
-
-      <a
-        href="#"
-        v-if="pohrana_podataka.trenutni_korisnik"
-        @click.prevent="odjava"
-        class="nav-link"
-        >Logout
-      </a>
-    </div>
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+          <li class="nav-item">
+            <router-link
+              class="nav-link"
+              v-if="pohrana_podataka.trenutni_korisnik"
+              to="/"
+              >Home</router-link
+            >
+          </li>
+          <li class="nav-item">
+            <router-link
+              class="nav-link"
+              v-if="pohrana_podataka.trenutni_korisnik"
+              to="/profesor"
+              >Profesor</router-link
+            >
+          </li>
+          <li class="nav-item">
+            <router-link
+              class="nav-link"
+              v-if="pohrana_podataka.trenutni_korisnik"
+              to="/student"
+              >Student</router-link
+            >
+          </li>
+          <li class="nav-item">
+            <router-link
+              class="nav-link"
+              v-if="pohrana_podataka.trenutni_korisnik"
+              to="/predmeti"
+              >Predmeti</router-link
+            >
+          </li>
+          <li class="nav-item">
+            <router-link
+              class="nav-link"
+              v-if="!pohrana_podataka.trenutni_korisnik"
+              to="/registracija"
+              >Registracija</router-link
+            >
+          </li>
+          <li class="nav-item">
+            <router-link
+              class="nav-link"
+              v-if="!pohrana_podataka.trenutni_korisnik"
+              to="/prijava"
+              >Prijava</router-link
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              href="#"
+              v-if="pohrana_podataka.trenutni_korisnik"
+              @click.prevent="odjava"
+              class="nav-link"
+              >Logout
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
     <router-view />
   </div>
 </template>

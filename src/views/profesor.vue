@@ -21,6 +21,13 @@
               :info="profesor"
             />
           </table>
+          <button
+            v-on:click="dohvati_iz_baze"
+            type="submit"
+            class="btn btn-primary"
+          >
+            Osvježi
+          </button>
         </div>
 
         <div class="col-sm">
@@ -110,6 +117,30 @@ export default {
   },
 
   methods: {
+    dohvati_iz_baze() {
+      db.collection("profesor")
+        .orderBy("ime", "asc")
+        .limit(50)
+        .get()
+        .then((query) => {
+          this.profesor = [];
+          brojac = 0;
+          query.forEach((doc) => {
+            const data = doc.data();
+            brojac++;
+
+            this.profesor.push({
+              id: doc.id,
+              ime: data.ime,
+              prezime: data.prezime,
+              email: data.emailProfesora,
+              predmet: data.predmet,
+              jmbag: data.jmbag,
+              brojac: brojac,
+            });
+          });
+        });
+    },
     dodajProfesora() {
       db.collection("profesor")
         .add({
