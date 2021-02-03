@@ -25,7 +25,7 @@
           <li class="nav-item">
             <router-link
               class="nav-link"
-              v-if="pohrana_podataka.trenutni_korisnik"
+              v-if="pohrana_podataka.profesor"
               to="/profesor"
               >Profesor</router-link
             >
@@ -33,7 +33,7 @@
           <li class="nav-item">
             <router-link
               class="nav-link"
-              v-if="pohrana_podataka.trenutni_korisnik"
+              v-if="pohrana_podataka.profesor"
               to="/student"
               >Student</router-link
             >
@@ -82,6 +82,7 @@
 import pohrana_podataka from "@/pohrana_podataka.js";
 import { firebase } from "@/firebase";
 import router from "@/router";
+import { db } from "@/firebase";
 
 firebase.auth().onAuthStateChanged((user) => {
   const currentRoute = router.currentRoute;
@@ -90,6 +91,26 @@ firebase.auth().onAuthStateChanged((user) => {
     //user is signed in.
     console.log("***" + user.email);
     pohrana_podataka.trenutni_korisnik = user.email;
+    db.collection("profesor")
+      .where("email", "==", pohrana_podataka.trenutni_korisnik)
+      .get()
+      .then((query) => {
+        query.forEach((doc) => {
+          const data = doc.data();
+          pohrana_podataka.profesor = pohrana_podataka.trenutni_korisnik;
+          console.log(pohrana_podataka.profesor);
+        });
+      });
+    db.collection("student")
+      .where("email", "==", pohrana_podataka.trenutni_korisnik)
+      .get()
+      .then((query) => {
+        query.forEach((doc) => {
+          const data = doc.data();
+          pohrana_podataka.student = pohrana_podataka.trenutni_korisnik;
+          console.log(pohrana_podataka.student);
+        });
+      });
 
     if (!currentRoute.meta.needsUser) {
       router.push({ name: "Home" });
@@ -98,6 +119,8 @@ firebase.auth().onAuthStateChanged((user) => {
     //user is not signed in.
     console.log("***No user");
     pohrana_podataka.trenutni_korisnik = null;
+    pohrana_podataka.profesor = null;
+    pohrana_podataka.student = null;
 
     if (currentRoute.meta.needsUser) {
       router.push({ name: "prijava" });
@@ -122,6 +145,8 @@ export default {
         .signOut()
         .then(() => {
           this.$router.push({ name: "prijava" });
+          pohrana_podataka.profesor = null;
+          pohrana_podataka.student = null;
         });
     },
   },
