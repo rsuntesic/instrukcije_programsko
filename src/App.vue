@@ -18,8 +18,16 @@
             <router-link
               class="nav-link"
               v-if="pohrana_podataka.trenutni_korisnik"
-              to="/"
-              >Home</router-link
+              to="/naslovna"
+              >Naslovna stranica</router-link
+            >
+          </li>
+          <li class="nav-item">
+            <router-link
+              class="nav-link"
+              v-if="pohrana_podataka.profesor"
+              to="/zahtjevi_instrukcija"
+              >Zahtjevi za instrukcije</router-link
             >
           </li>
           <li class="nav-item">
@@ -113,7 +121,7 @@ firebase.auth().onAuthStateChanged((user) => {
       });
 
     if (!currentRoute.meta.needsUser) {
-      router.push({ name: "Home" });
+      router.push({ name: "naslovna" });
     }
   } else {
     //user is not signed in.
@@ -123,7 +131,7 @@ firebase.auth().onAuthStateChanged((user) => {
     pohrana_podataka.student = null;
 
     if (currentRoute.meta.needsUser) {
-      router.push({ name: "prijava" });
+      router.push({ name: "Prijava" });
     }
   }
 });
@@ -144,7 +152,7 @@ export default {
         .auth()
         .signOut()
         .then(() => {
-          this.$router.push({ name: "prijava" });
+          this.$router.push({ name: "Prijava" });
           pohrana_podataka.profesor = null;
           pohrana_podataka.student = null;
         });
