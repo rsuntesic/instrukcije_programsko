@@ -142,27 +142,37 @@ export default {
         });
     },
     dodajProfesora() {
-      db.collection("profesor")
-        .add({
-          korisnik: this.korisnik,
-          ime: this.ime,
-          prezime: this.prezime,
-          email: this.emailProfesora,
-          predmet: this.predmet,
-          jmbag: this.jmbag,
-          vrijeme_unosa: Date.now(),
-        })
-        .then(() => {
-          alert("Spremljeno");
-          this.ime = "";
-          this.prezime = "";
-          this.emailProfesora = "";
-          this.predmet = "";
-          this.jmbag = "";
-        })
-        .catch(function(e) {
-          console.error(e);
-        });
+      if (
+        this.ime != "" &&
+        this.prezime != "" &&
+        this.email != "" &&
+        this.predmet != "" &&
+        this.jmbag != ""
+      ) {
+        db.collection("profesor")
+          .add({
+            korisnik: this.korisnik,
+            ime: this.ime,
+            prezime: this.prezime,
+            email: this.emailProfesora,
+            predmet: this.predmet,
+            jmbag: this.jmbag,
+            vrijeme_unosa: Date.now(),
+          })
+          .then(() => {
+            alert("Spremljeno");
+            this.ime = "";
+            this.prezime = "";
+            this.emailProfesora = "";
+            this.predmet = "";
+            this.jmbag = "";
+          })
+          .catch(function(e) {
+            console.error(e);
+          });
+      } else {
+        alert("Neki od obaveznih podataka nije unesen!!");
+      }
     },
   },
 

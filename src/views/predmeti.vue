@@ -83,25 +83,34 @@ export default {
 
   methods: {
     dodajZahtjev() {
-      db.collection("zahtjevi")
-        .add({
-          korisnik: this.korisnik,
-          odaberiPredmet: this.odaberiPredmet,
-          razinaZnanja: this.razinaZnanja,
-          Datum: this.Datum,
-          Vrijeme: this.Vrijeme,
-          vrijeme_unosa: Date.now(),
-        })
-        .then(() => {
-          alert("Spremljeno");
-          this.odaberiPredmet = "";
-          this.razinaZnanja = "";
-          this.Datum = "";
-          this.Vrijeme = "";
-        })
-        .catch(function(e) {
-          console.error(e);
-        });
+      if (
+        this.odaberiPredmet != "" &&
+        this.razinaZnanja != "" &&
+        this.Datum != "" &&
+        this.Vrijeme != ""
+      ) {
+        db.collection("zahtjevi")
+          .add({
+            korisnik: this.korisnik,
+            odaberiPredmet: this.odaberiPredmet,
+            razinaZnanja: this.razinaZnanja,
+            Datum: this.Datum,
+            Vrijeme: this.Vrijeme,
+            vrijeme_unosa: Date.now(),
+          })
+          .then(() => {
+            alert("Spremljeno");
+            this.odaberiPredmet = "";
+            this.razinaZnanja = "";
+            this.Datum = "";
+            this.Vrijeme = "";
+          })
+          .catch(function(e) {
+            console.error(e);
+          });
+      } else {
+        alert("Neki od obaveznih podataka nije unesen!!");
+      }
     },
   },
 };

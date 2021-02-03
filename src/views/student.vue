@@ -129,25 +129,35 @@ export default {
         });
     },
     dodajStudenta() {
-      db.collection("student")
-        .add({
-          korisnik: this.korisnik,
-          ime: this.ime,
-          prezime: this.prezime,
-          email: this.emailStudent,
-          jmbag: this.jmbag,
-          vrijeme_unosa: Date.now(),
-        })
-        .then(() => {
-          alert("Spremljeno");
-          this.ime = "";
-          this.prezime = "";
-          this.emailStudent = "";
-          this.jmbag = "";
-        })
-        .catch(function(e) {
-          console.error(e);
-        });
+      if (
+        this.ime != "" &&
+        this.prezime != "" &&
+        this.email != "" &&
+        this.predmet != "" &&
+        this.jmbag != ""
+      ) {
+        db.collection("student")
+          .add({
+            korisnik: this.korisnik,
+            ime: this.ime,
+            prezime: this.prezime,
+            email: this.emailStudent,
+            jmbag: this.jmbag,
+            vrijeme_unosa: Date.now(),
+          })
+          .then(() => {
+            alert("Spremljeno");
+            this.ime = "";
+            this.prezime = "";
+            this.emailStudent = "";
+            this.jmbag = "";
+          })
+          .catch(function(e) {
+            console.error(e);
+          });
+      } else {
+        alert("Neki od obaveznih podataka nije unesen!!");
+      }
     },
   },
 
