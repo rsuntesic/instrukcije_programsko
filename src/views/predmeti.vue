@@ -16,7 +16,7 @@
                 <option> Fizika </option>
                 <option> Matematika </option>
                 <option> Kemija </option>
-                <option> Infromatika </option>
+                <option> Informatika </option>
                 <option> Engleski jezik </option>
                 <option> Njemacki jezik </option>
               </select>
@@ -83,13 +83,37 @@ export default {
 
   methods: {
     dodajZahtjev() {
-      if (
-        this.odaberiPredmet != "" &&
-        this.razinaZnanja != "" &&
-        this.Datum != "" &&
-        this.Vrijeme != ""
-      ) {
-        db.collection("zahtjevi")
+      if (pohrana_podataka.student) {
+        if (
+          this.odaberiPredmet != "" &&
+          this.razinaZnanja != "" &&
+          this.Datum != "" &&
+          this.Vrijeme != ""
+        ) {
+          db.collection("zahtjevi")
+            .add({
+              korisnik: this.korisnik,
+              odaberiPredmet: this.odaberiPredmet,
+              razinaZnanja: this.razinaZnanja,
+              Datum: this.Datum,
+              Vrijeme: this.Vrijeme,
+              vrijeme_unosa: Date.now(),
+            })
+            .then(() => {
+              alert("Spremljeno");
+              this.odaberiPredmet = "";
+              this.razinaZnanja = "";
+              this.Datum = "";
+              this.Vrijeme = "";
+            })
+            .catch(function(e) {
+              console.error(e);
+            });
+        } else {
+          alert("Neki od obaveznih podataka nije unesen!!");
+        }
+      } else {
+        db.collection("predmet")
           .add({
             korisnik: this.korisnik,
             odaberiPredmet: this.odaberiPredmet,
@@ -108,8 +132,6 @@ export default {
           .catch(function(e) {
             console.error(e);
           });
-      } else {
-        alert("Neki od obaveznih podataka nije unesen!!");
       }
     },
   },
