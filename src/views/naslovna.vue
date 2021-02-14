@@ -36,7 +36,7 @@ export default {
       console.log("Firebase dohvat");
 
       db.collection("predmet")
-        .orderBy("vrijeme_unosa", "asc")
+        .orderBy("vrijeme_unosa", "desc")
         .get()
         .then((query) => {
           this.predmeti = [];

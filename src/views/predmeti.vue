@@ -97,6 +97,8 @@ export default {
               razinaZnanja: this.razinaZnanja,
               Datum: this.Datum,
               Vrijeme: this.Vrijeme,
+              profesor: "",
+              potvrda: false,
               vrijeme_unosa: Date.now(),
             })
             .then(() => {
@@ -120,6 +122,8 @@ export default {
             razinaZnanja: this.razinaZnanja,
             Datum: this.Datum,
             Vrijeme: this.Vrijeme,
+            student: "",
+            potvrda: false,
             vrijeme_unosa: Date.now(),
           })
           .then(() => {
