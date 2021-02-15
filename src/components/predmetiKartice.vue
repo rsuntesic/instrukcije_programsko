@@ -39,11 +39,21 @@
       <br />
       {{ info.korisnik }}
     </div>
+    <button
+      v-on:click="potvdriInstrukcije"
+      v-if="info.potvrda == false"
+      type="submit"
+      class="btn btn-primary"
+    >
+      Potvrdi
+    </button>
   </div>
 </template>
 
 <script>
 import moment from "moment";
+import { db } from "@/firebase";
+import pohrana_podataka from "@/pohrana_podataka";
 export default {
   props: ["info"],
   name: "PredmetiKartice",
@@ -55,7 +65,40 @@ export default {
       informatika: "Informatika",
       engleski: "Engleski",
       njemacki: "Njemacki",
+      korisnik: pohrana_podataka.trenutni_korisnik,
     };
+  },
+
+  methods: {
+    potvdriInstrukcije() {
+      if (pohrana_podataka.profesor) {
+        db.collection("predmet")
+          .doc(this.info.id)
+          .update({
+            student: this.korisnik,
+            potvrda: true,
+          })
+          .then(function() {
+            alert("Poslan je zahtjev");
+          })
+          .catch(function(error) {
+            alert("Greška kod zahtjeva: ", error);
+          });
+      } else {
+        db.collection("zahtjev")
+          .doc(this.info.id)
+          .update({
+            profesor: this.korisnik,
+            potvrda: true,
+          })
+          .then(function() {
+            alert("Poslan je zahtjev");
+          })
+          .catch(function(error) {
+            alert("Greška kod zahtjeva: ", error);
+          });
+      }
+    },
   },
 
   computed: {
