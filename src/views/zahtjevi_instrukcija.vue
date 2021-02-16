@@ -44,6 +44,7 @@ export default {
             const data = doc.data();
 
             this.zahtjevi.push({
+              potvrda: data.potvrda,
               id: doc.id,
               datum: data.Datum,
               vrijeme: data.Vrijeme,
