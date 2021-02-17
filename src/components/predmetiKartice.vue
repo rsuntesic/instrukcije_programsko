@@ -54,6 +54,7 @@
 import moment from "moment";
 import { db } from "@/firebase";
 import pohrana_podataka from "@/pohrana_podataka";
+import router from "@/router";
 export default {
   props: ["info"],
   name: "PredmetiKartice",
@@ -68,11 +69,10 @@ export default {
       korisnik: pohrana_podataka.trenutni_korisnik,
     };
   },
-
   methods: {
     potvdriInstrukcije() {
-      if (pohrana_podataka.profesor) {
-        db.collection("predmet")
+      if (pohrana_podataka.student != "") {
+        db.collection("predmeti")
           .doc(this.info.id)
           .update({
             student: this.korisnik,
@@ -80,12 +80,13 @@ export default {
           })
           .then(function() {
             alert("Poslan je zahtjev");
+            location.reload();
           })
           .catch(function(error) {
-            alert("Greška kod zahtjeva: ", error);
+            console.log("Greška kod zahtjeva: " + error);
           });
       } else {
-        db.collection("zahtjev")
+        db.collection("zahtjevi")
           .doc(this.info.id)
           .update({
             profesor: this.korisnik,
@@ -93,9 +94,10 @@ export default {
           })
           .then(function() {
             alert("Poslan je zahtjev");
+            location.reload();
           })
           .catch(function(error) {
-            alert("Greška kod zahtjeva: ", error);
+            console.log("Greška kod zahtjeva: " + error);
           });
       }
     },

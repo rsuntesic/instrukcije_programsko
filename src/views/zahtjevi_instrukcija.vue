@@ -9,7 +9,15 @@
         class="card"
       />
     </div>
-    <div class="col-5"></div>
+    <div class="col-5">
+      <img
+        src="@/assets/instrukcije-slika-sova.jpg"
+        height="600"
+        class="d-inline-block align-top"
+        alt=""
+        loading="lazy"
+      />
+    </div>
     <div class="col-1"></div>
   </div>
 </template>
@@ -36,7 +44,7 @@ export default {
       console.log("Firebase dohvat");
 
       db.collection("zahtjevi")
-        .orderBy("vrijeme_unosa", "asc")
+        .orderBy("vrijeme_unosa", "desc")
         .get()
         .then((query) => {
           this.zahtjevi = [];
