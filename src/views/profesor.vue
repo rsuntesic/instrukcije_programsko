@@ -133,7 +133,7 @@ export default {
               id: doc.id,
               ime: data.ime,
               prezime: data.prezime,
-              email: data.emailProfesora,
+              email: data.email,
               predmet: data.predmet,
               jmbag: data.jmbag,
               brojac: brojac,

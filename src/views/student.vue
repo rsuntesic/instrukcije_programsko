@@ -121,7 +121,7 @@ export default {
               id: doc.id,
               ime: data.ime,
               prezime: data.prezime,
-              email: data.emailStudent,
+              email: data.email,
               jmbag: data.jmbag,
               brojac: brojac,
             });

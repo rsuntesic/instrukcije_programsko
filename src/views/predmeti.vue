@@ -115,7 +115,7 @@ export default {
           alert("Neki od obaveznih podataka nije unesen!!");
         }
       } else {
-        db.collection("predmet")
+        db.collection("predmeti")
           .add({
             korisnik: this.korisnik,
             odaberiPredmet: this.odaberiPredmet,
