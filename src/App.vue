@@ -14,21 +14,22 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-           <li class="nav-item">
+          <li class="nav-item">
+            <img
+              src="@/assets/instrukcije-slika-sova.jpg"
+              height="50"
+              class="d-inline-block align-top"
+              alt=""
+              loading="lazy"
+            />
+          </li>
+          <li class="nav-item">
             <router-link
               class="nav-link"
               v-if="pohrana_podataka.student"
               to="/naslovna"
               >Ponuđene instrukcije
             </router-link>
-          </li>
-          <li class="nav-item">
-            <router-link
-              class="nav-link"
-              v-if="pohrana_podataka.trenutni_korisnik"
-              to="/naslovna"
-              >Naslovna stranica</router-link
-            >
           </li>
           <li class="nav-item">
             <router-link
@@ -91,6 +92,30 @@
       </div>
     </nav>
     <router-view />
+    <footer class="footer">
+      <div class="container">
+        <div class="row equeal-heights-row">
+          <ul class="footer-link-col col-md-4 col-xs-12"></ul>
+          <ul class="footer-link-col col-md-4 col-xs-12">
+            <p>Izradili:</p>
+            <p>Programsko inženjerstvo</p>
+            <p>Rudolf Suntešić</p>
+            <p>Adis Subašić</p>
+          </ul>
+          <ul class="footer-link-col col-md-4 col-xs-12"></ul>
+        </div>
+      </div>
+      <div class="footer-copyright">
+        <span>
+          Fakultet informate u Puli
+        </span>
+        <span>
+          <a target="_blank" href="http://fipu.unipu.hr">
+            FIPU
+          </a>
+        </span>
+      </div>
+    </footer>
   </div>
 </template>
 
@@ -170,24 +195,5 @@ export default {
 </script>
 
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
-}
+@import "@/assets/css/style.scss";
 </style>
