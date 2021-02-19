@@ -1,0 +1,29 @@
+#app {
+  background-color: rgb(153, 245, 153);
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+}
+
+#nav {
+  padding: 30px;
+  background-color: rgb(241, 241, 74);
+
+  a {
+    font-weight: bold;
+    color: #2c3e50;
+
+    &.router-link-exact-active {
+      color: red;
+    }
+  }
+  .nav-link:hover {
+    color: red;
+  }
+}
+
+.footer {
+  background-color: rgb(241, 241, 74);
+}
