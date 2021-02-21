@@ -154,7 +154,7 @@ firebase.auth().onAuthStateChanged((user) => {
       });
 
     if (!currentRoute.meta.needsUser) {
-      router.push({ name: "naslovna" });
+      router.push({ name: "Predmeti" });
     }
   } else {
     //user is not signed in.
